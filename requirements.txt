@@ -1,0 +1,5 @@
+Flask==2.0.3
+google-cloud-storage==2.1.0
+google-auth==1.35.0
+tensorflow==2.6.0
+numpy==1.21.2
