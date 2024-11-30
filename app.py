@@ -101,6 +101,6 @@ def predict():
         print('Prediction error:', e)
         return jsonify({'error': 'Failed to predict image'}), 500
     
-# Run the server
 if __name__ == '__main__':
-    app.run(host='0.0.0.0', port=8081)
+    port = int(os.environ.get('PORT', 8080))  # Gunakan port dari environment
+    app.run(host='0.0.0.0', port=port)
