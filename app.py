@@ -8,11 +8,11 @@ import tensorflow as tf
 import tempfile
 
 # Set environment variable within the script
-os.environ['GOOGLE_APPLICATION_CREDENTIALS'] = 'serviceaccountkey.json'
+os.environ['GOOGLE_APPLICATION_CREDENTIALS'] = 'serviceaccount-ml/secret-ml'
 
 # Load service account credentials
 credentials = service_account.Credentials.from_service_account_file(
-    'serviceaccountkey.json'  # Path to your service account key file
+    'serviceaccount-ml/secret-ml'  # Path to your service account key file
 )
 
 app = Flask(__name__)
@@ -102,5 +102,5 @@ def predict():
         return jsonify({'error': 'Failed to predict image'}), 500
     
 if __name__ == '__main__':
-    port = int(os.environ.get('PORT', 8080))  # Gunakan port dari environment
+    port = int(os.environ.get('PORT', 8081))  # Gunakan port dari environment
     app.run(host='0.0.0.0', port=port)
