@@ -14,7 +14,7 @@ RUN pip install --no-cache-dir -r requirements.txt
 COPY . .
 
 # Menyediakan port (opsional jika menggunakan web server)
-EXPOSE 3001
+EXPOSE 8081
 
 # Menjalankan aplikasi (ubah 'app.py' dengan entry point Anda)
 CMD ["python", "app.py"]
