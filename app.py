@@ -8,11 +8,11 @@ import tensorflow as tf
 import tempfile
 
 # Set environment variable within the script
-os.environ['GOOGLE_APPLICATION_CREDENTIALS'] = 'C:/Users/Falah/ml-backend/keyml.json'
+os.environ['GOOGLE_APPLICATION_CREDENTIALS'] = 'serviceaccountkey.json'
 
 # Load service account credentials
 credentials = service_account.Credentials.from_service_account_file(
-    'C:/Users/Falah/ml-backend/keyml.json'  # Path to your service account key file
+    'serviceaccountkey.json'  # Path to your service account key file
 )
 
 app = Flask(__name__)
@@ -29,6 +29,20 @@ bucket_images = storage_client.bucket(config['bucketPaddy'])
 # URL ke model di Google Cloud Storage
 model_url = 'gs://paddymodel/model_padicare.h5'
 model = None  # Initialize model as None
+
+# List of class labels (modify this to match your model's classes)
+class_labels = [
+    "bacterial_leaf_blight",
+    "bacterial_leaf_streak",
+    "bacterial_panicle_blight",
+    "blast",
+    "brown_spot",
+    "dead_heart",
+    "downy_mildew",
+    "hispa",
+    "normal",
+    "tungro"
+]
 
 # Function to download the model from Google Cloud Storage
 def load_model_from_gcs(model_url):
@@ -58,8 +72,10 @@ def predict_image(image_data):
     image = tf.image.resize(image, [224, 224])  # Adjust size according to your model
     image = np.expand_dims(image, axis=0)  # Add batch dimension
     predictions = model.predict(image)
-    label = np.argmax(predictions, axis=1)[0]  # Get label with argmax
-    return int(label)  # Return label as integer
+    label_index = np.argmax(predictions, axis=1)[0]  # Get label index with argmax
+    label = class_labels[label_index]  # Map index to class label
+    confidence = float(predictions[0][label_index])  # Get confidence score
+    return label, confidence  # Return label and confidence score
 
 # Route for the root URL
 @app.route('/')

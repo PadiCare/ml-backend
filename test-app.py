@@ -18,7 +18,7 @@ class MLBackendTestCase(unittest.TestCase):
     def test_predict_endpoint_with_valid_image(self):
         """Test the predict endpoint with a valid image from storage."""
         # Replace with a valid image ID that you know exists in your GCS bucket
-        image_id = "-ZxIhvEI9EN8cPkaseIbX.jpg"  # Update with an actual valid image ID
+        image_id = "200027.jpg"  # Update with an actual valid image ID
         response = self.app.post(
             '/predict',
             data=json.dumps({"imageId": image_id}),
@@ -31,7 +31,7 @@ class MLBackendTestCase(unittest.TestCase):
 
     def test_predict_endpoint_with_invalid_image(self):
         """Test the predict endpoint with an invalid image ID."""
-        image_id = "-ZxIhvEI9EN8cPkaseIbX.jpg"  # Use a non-existent image ID
+        image_id = "200027.jpg"  # Use a non-existent image ID
         response = self.app.post(
             '/predict',
             data=json.dumps({"imageId": image_id}),

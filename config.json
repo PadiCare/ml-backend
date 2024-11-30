@@ -1,6 +1,6 @@
 {
-    "projectId": "learning-project-442809",
-    "bucketModel": "paddymodel",
+    "projectId": "deployment-cloud-run",
+    "bucketModel": "paddy-model",
     "modelPath": "model_padicare.h5",
-    "bucketPaddy": "imgpredict"
+    "bucketPaddy": "imgtemp"
 }
