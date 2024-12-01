@@ -8,7 +8,7 @@ import tensorflow as tf
 import tempfile
 
 # Set environment variable within the script
-os.environ['GOOGLE_APPLICATION_CREDENTIALS'] = 'ml-account/secret-ml'
+os.environ['GOOGLE_APPLICATION_CREDENTIALS'] = '/ml-account/serviceaccountkey.json'
 
 app = Flask(__name__)
 
