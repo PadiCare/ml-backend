@@ -13,7 +13,7 @@ os.environ['GOOGLE_APPLICATION_CREDENTIALS'] = 'ml-account/secret-ml'
 app = Flask(__name__)
 
 # Initialize the Google Cloud Storage client with the credentials
-storage_client = storage.Client
+storage_client = storage.Client()
 
 # Initialize Google Cloud Storage bucket
 with open("config.json") as config_file:
