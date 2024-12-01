@@ -8,12 +8,17 @@ import tensorflow as tf
 import tempfile
 
 # Set environment variable within the script
-os.environ['GOOGLE_APPLICATION_CREDENTIALS'] = '/ml-account/secret-ml/serviceaccountkey.json'
+os.environ['GOOGLE_APPLICATION_CREDENTIALS'] = '/ml-account/secret-ml'
+
+# Load service account credentials
+credentials = service_account.Credentials.from_service_account_file(
+    '/ml-account/secret-ml'  # Path to your service account key file
+)
 
 app = Flask(__name__)
 
 # Initialize the Google Cloud Storage client with the credentials
-storage_client = storage.Client()
+storage_client = storage.Client(credentials=credentials)
 
 # Initialize Google Cloud Storage bucket
 with open("config.json") as config_file:
